@@ -10,6 +10,12 @@ from .utils import handle_cli_error
 logger = logging.getLogger("init")
 
 
+def _create_empty_main_file(main_file):
+    with open(main_file, "w") as fp:
+        fp.write("# TODO: insert robot code here\n")
+    logger.info("Created empty %s", main_file)
+
+
 class Init:
     """
     Initializes a robot project
@@ -25,10 +31,7 @@ class Init:
         # Create robot.py if it doesn't already exist
         # - TODO: it would be neat if it could download an example from github
         if not main_file.exists():
-            with open(main_file, "w") as fp:
-                fp.write("# TODO: insert robot code here\n")
-
-            logger.info("Created empty %s", main_file)
+            _create_empty_main_file(main_file)
 
         # Create pyproject.toml if it doesn't already exist
         pyproject_path = pyproject.toml_path(project_path)
